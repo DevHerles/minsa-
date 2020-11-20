@@ -1,0 +1,54 @@
+app:
+  name: MINSA spring boot api application
+  api:
+    title: Spring boot APIs
+    version: 1.0.0
+    logging:
+      enable: true
+      url-patterns: "/api/*"
+      requestIdParamName: reqId
+    swagger:
+      enable: false
+logging:
+  level:
+    root: INFO
+    pe.gob.minsa.microservice: DEBUG
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%8.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %X{REQUEST_ID} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
+
+server:
+  port: 8888
+
+spring:
+  data:
+    rest:
+      base-path: /api
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL94Dialect
+  datasource:
+    jdbc-url: jdbc:postgresql://localhost:5432/minsa
+    username: odoo
+    password: odoo
+    pool-size: 30
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+    date-format: "dd-MM-yyyy hh:mm:ss"
+    serialization:
+      INDENT_OUTPUT: true
+      FAIL_ON_EMPTY_BEANS: false
+      WRITE_DATES_AS_TIMESTAMPS: false
+    deserialization:
+      FAIL_ON_UNKNOWN_PROPERTIES: false
+      FAIL_ON_IGNORED_PROPERTIES: false
+management:
+  trace:
+    http:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
