@@ -32,8 +32,8 @@ public class Company extends DateAudit {
     @Email
     String email;
 
-    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Support> supports = new ArrayList<>();
+    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
+    List<Support> supports;
 
     @ManyToOne(cascade = CascadeType.ALL)
     Ubigeo ubigeo;

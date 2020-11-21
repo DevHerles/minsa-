@@ -13,6 +13,7 @@ import pe.gob.minsa.microservicio.search.SearchRequestDto;
 import pe.gob.minsa.microservicio.search.SearchResponseDto;
 import pe.gob.minsa.microservicio.search.SearchUtil;
 
+import java.util.List;
 import java.util.function.Function;
 
 import static org.springframework.data.domain.Sort.by;
@@ -47,4 +48,7 @@ public class SupportService {
         supportRepository.delete(faq);
     }
 
+    public List<Support> findByCompanyId(Long id) {
+        return supportRepository.findByCompanyId(id);
+    }
 }

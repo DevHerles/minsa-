@@ -1,5 +1,6 @@
 package pe.gob.minsa.microservicio.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,12 +19,13 @@ public class Support extends DateAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Lob
     String description;
     double quantity;
     int times;
     double total;
 
+    @JsonIgnore
     @ManyToOne
+    //@JoinColumn(name = "company_id", insertable = false, updatable = false)
     Company company;
 }

@@ -1,8 +1,11 @@
 package pe.gob.minsa.microservicio.dto;
 
+import lombok.Data;
+
+@Data
 public class UbigeoDto {
-    private Long id;
-    private String department;
-    private String province;
-    private String district;
+    public Long id;
+    public String department;
+    public String province;
+    public String district;
 }

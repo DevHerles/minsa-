@@ -7,8 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import pe.gob.minsa.microservicio.model.Company;
+import pe.gob.minsa.microservicio.model.Support;
 import pe.gob.minsa.microservicio.model.Ubigeo;
 import pe.gob.minsa.microservicio.search.SearchRequestDto;
+import pe.gob.minsa.microservicio.service.CompanyService;
 import pe.gob.minsa.microservicio.service.UbigeoService;
 import pe.gob.minsa.microservicio.utils.ApiResponseEntity;
 
@@ -21,6 +24,7 @@ import javax.validation.Valid;
 @RequestMapping("/api/ubigeo")
 public class UbigeoController {
     private final UbigeoService ubigeoService;
+    private final CompanyService companyService;
 
     @GetMapping
     public ResponseEntity<?> findAll(@Valid SearchRequestDto request) {

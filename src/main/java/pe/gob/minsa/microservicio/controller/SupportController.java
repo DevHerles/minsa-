@@ -7,8 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import pe.gob.minsa.microservicio.model.Company;
 import pe.gob.minsa.microservicio.model.Support;
 import pe.gob.minsa.microservicio.search.SearchRequestDto;
+import pe.gob.minsa.microservicio.service.CompanyService;
 import pe.gob.minsa.microservicio.service.SupportService;
 import pe.gob.minsa.microservicio.utils.ApiResponseEntity;
 
@@ -21,6 +23,7 @@ import javax.validation.Valid;
 @RequestMapping("/api/supports")
 public class SupportController {
     private final SupportService supportService;
+    private final CompanyService companyService;
 
     @GetMapping
     public ResponseEntity<?> findAll(@Valid SearchRequestDto request) {
@@ -28,9 +31,21 @@ public class SupportController {
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@Valid @RequestBody Support support) {
+    public ResponseEntity<?> save(@RequestBody Support support) {
         try {
             support.setId(null);
+            return ApiResponseEntity.successCreate(supportService.save(support));
+        } catch (Exception exception) {
+            return ApiResponseEntity.error(exception);
+        }
+    }
+
+    @PostMapping(value = "{companyId}/company")
+    public ResponseEntity<?> save(@Valid @RequestBody Support support, @PathVariable Long companyId) {
+        try {
+            Company company = companyService.findById(companyId);
+            if (company == null) return ApiResponseEntity.error("La empresa no existe.");
+            support.setCompany(company);
             return ApiResponseEntity.successCreate(supportService.save(support));
         } catch (Exception exception) {
             return ApiResponseEntity.error(exception);

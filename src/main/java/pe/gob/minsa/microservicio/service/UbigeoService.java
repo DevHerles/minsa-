@@ -13,6 +13,7 @@ import pe.gob.minsa.microservicio.search.SearchRequestDto;
 import pe.gob.minsa.microservicio.search.SearchResponseDto;
 import pe.gob.minsa.microservicio.search.SearchUtil;
 
+import java.util.List;
 import java.util.function.Function;
 
 import static org.springframework.data.domain.Sort.by;
@@ -47,4 +48,7 @@ public class UbigeoService {
         ubigeoRepository.delete(faq);
     }
 
+    public Ubigeo findByCompanyId(Long id) {
+        return ubigeoRepository.findByCompany(id);
+    }
 }

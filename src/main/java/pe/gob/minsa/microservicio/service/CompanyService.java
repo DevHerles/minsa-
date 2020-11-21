@@ -31,8 +31,8 @@ public class CompanyService {
         return SearchUtil.searchResultResponse(companies, mapper);
     }
 
-    public Company save(Company faq) {
-        return companyRepository.save(faq);
+    public Company save(Company company) {
+        return companyRepository.save(company);
     }
 
     public Company findById(Long id) {
@@ -43,8 +43,8 @@ public class CompanyService {
         companyRepository.deleteById(id);
     }
 
-    public void delete(Company faq) {
-        companyRepository.delete(faq);
+    public void delete(Company company) {
+        companyRepository.delete(company);
     }
 
     public void deleteAll() {
